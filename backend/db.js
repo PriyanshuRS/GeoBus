@@ -9,9 +9,9 @@ const pool = new Pool({
 
 pool.query("SELECT NOW()", (err, res) => {
   if (err) {
-    console.error("❌ Database connection failed:", err.stack);
+    console.error("Database connection failed:", err.stack);
   } else {
-    console.log("✅ Connected to Postgres database at:", res.rows[0].now);
+    console.log("Connected to Postgres database at:", res.rows[0].now);
   }
 });
 
