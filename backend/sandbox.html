@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transit Client Sandbox</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; background: #121212; color: #fff; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #ff4757; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Transit Client Sandbox 🚌</h1>
+    <p>Check your Node terminal. You should see a new connection.</p>
+    <button onclick="simulateTunnel()">Simulate Tunnel (Drop Network)</button>
+
+    <script>
+        // Connect to our local Node.js backend
+        const socket = io('http://localhost:3000');
+
+        socket.on('connect', () => {
+            console.log('Connected to Backend. Socket ID:', socket.id);
+        });
+
+        socket.on('disconnect', (reason) => {
+            console.log('Disconnected. Reason:', reason);
+        });
+
+        // Simulating the "Mobile Network Drop" engineering challenge
+        function simulateTunnel() {
+            console.log('Driver entered a tunnel. Force killing socket...');
+            // We forcefully close the connection on the client side
+            socket.disconnect(); 
+        }
+    </script>
+</body>
+</html>
